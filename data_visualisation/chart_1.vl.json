@@ -1,7 +1,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "data": {
-        "url": "https://raw.githubusercontent.com/Justetete/COMP40610_Information_Visualisation_Assignment/refs/heads/main/data_cleaning/combined_clean_data.csv?token=GHSAT0AAAAAADKLU4TX6SNDQXIV3YJ4VDWC2ICBBWQ",
+        "url": "https://raw.githubusercontent.com/Justetete/COMP40610_Information_Visualisation_Assignment/refs/heads/main/data_cleaning/combined_clean_data.csv",
         "format": {"type": "csv"}
     },
     "transform": [
