@@ -1,0 +1,72 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+        "url": "https://raw.githubusercontent.com/Justetete/COMP40610_Information_Visualisation_Assignment/main/data_cleaning/combined_clean_data_v1.csv",
+        "format": {"type": "csv"}
+    },
+    "transform": [
+        {"filter": "datum.Year == 2024"},
+        {"filter": "datum['Age Group'] != 'All ages'"},
+        {"filter": "datum['Age Group'] != '25-54 years'"},
+        {"filter": "datum.Employment_Rate != null"},
+        {"filter": "datum['NUTS 2 Region'] == 'Ireland'"},
+        {"filter": "datum['Education Attainment Level'] != 'Level of education - not stated'"},
+        {"filter": "datum['Sex'] != 'Both sexes'"}
+    ],
+    "width": 600,
+    "height": 300,
+    "title": "Employment and Unemployment Rate by Age Group and Gender in 2024",
+    "layer":[
+        {
+            
+            
+            "mark": "line",
+            "encoding": {
+                "x": {
+                    "field": "Age Group",
+                    "type": "nominal",
+                    "title": "Age Group",
+                    "axis": {"labelAngle": -45}
+                },
+                "y": {
+                    "aggregate": "mean",
+                    "field": "Employment_Rate",
+                    "type": "quantitative",
+                    "scale": {"domain": [0, 100]},
+                    "axis": {"titleColor": "#1f77b4", "grid": false}
+                },
+                "color": {
+                    "field": "Sex",
+                    "type": "nominal",
+                    "title": "Gender",
+                    "scale": {"scheme": "category10"}
+                }
+            }
+        },
+        {
+            "mark":"line",
+            "encoding": {
+                    "x": {
+                    "field": "Age Group",
+                    "type": "nominal",
+                    "title": "Age Group",
+                    "axis": {"labelAngle": -45}
+                    },
+                    "y": {
+                        "aggregate": "mean",
+                        "field": "Unemployment_Rate",
+                        "type": "quantitative",
+                        "scale": {"domain": [0, 20]},
+                        "axis": {"orient": "right", "titleColor": "#ff7f0e"}
+                    },
+                    "color": {
+                        "field": "Sex",
+                        "type": "nominal",
+                        "title": "Gender",
+                        "scale": {"scheme": "category10"}
+                    }
+            }
+        }
+    ],
+    "resolve": {"scale": {"y": "independent"}, "axis": {"y": "independent"}}
+}

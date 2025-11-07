@@ -1,0 +1,147 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Ireland Employment Rate Analysis Dashboard (2024)",
+    "fontSize": 18,
+    "anchor": "middle"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/Justetete/COMP40610_Information_Visualisation_Assignment/main/data_cleaning/combined_clean_data_v1.csv",
+    "format": {"type": "csv"}
+  },
+  "transform": [
+    {"filter": "datum.Year == 2024"},
+    {"filter": "datum.Employment_Rate != null"},
+    {"filter": "datum['NUTS 2 Region'] == 'Ireland'"},
+    {"filter": "datum['Education Attainment Level'] != 'Level of education - not stated'"}
+  ],
+  "params": [
+    {
+      "name": "brush",
+      "select": {"type": "point", "fields": ["Age Group"]}
+    },
+    {
+      "name": "education_brush",
+      "select": {"type": "point", "fields": ["Education Attainment Level"]}
+    }
+  ],
+  "vconcat": [
+    {
+      "title": "Employment Rate by Age Group and Gender",
+      "width": 600,
+      "height": 300,
+      "mark": "bar",
+      "encoding": {
+        "x": {
+          "field": "Age Group",
+          "type": "nominal",
+          "title": "Age Group",
+          "axis": {"labelAngle": -45}
+        },
+        "y": {
+          "aggregate": "mean",
+          "field": "Employment_Rate",
+          "type": "quantitative",
+          "title": "Average Employment Rate (%)",
+          "scale": {"domain": [0, 100]}
+        },
+        "color": {
+          "field": "Sex",
+          "type": "nominal",
+          "title": "Gender",
+          "scale": {"scheme": "category10"}
+        },
+        "xOffset": {"field": "Sex"},
+        "opacity": {
+          "condition": {"param": "brush", "value": 1},
+          "value": 0.3
+        },
+        "tooltip": [
+          {"field": "Age Group", "type": "nominal"},
+          {"field": "Sex", "type": "nominal"},
+          {"aggregate": "mean", "field": "Employment_Rate", "type": "quantitative", "title": "Avg Employment Rate", "format": ".1f"}
+        ]
+      }
+    },
+    {
+      "hconcat": [
+        {
+          "title": "Employment Rate by Education Level",
+          "width": 400,
+          "height": 300,
+          "mark": "bar",
+          "transform": [
+            {"filter": {"param": "brush", "empty": true}}
+          ],
+          "encoding": {
+            "x": {
+              "aggregate": "mean",
+              "field": "Employment_Rate",
+              "type": "quantitative",
+              "title": "Average Employment Rate (%)",
+              "scale": {"domain": [0, 100]}
+            },
+            "y": {
+              "field": "Education Attainment Level",
+              "type": "nominal",
+              "title": "Education Level",
+              "sort": "-x",
+              "axis": {"labelLimit": 200}
+            },
+            "color": {
+              "field": "Sex",
+              "type": "nominal",
+              "title": "Gender"
+            },
+            "yOffset": {"field": "Sex"},
+            "opacity": {
+              "condition": {"param": "education_brush", "value": 1},
+              "value": 0.3
+            },
+            "tooltip": [
+              {"field": "Education Attainment Level", "type": "nominal", "title": "Education"},
+              {"field": "Sex", "type": "nominal"},
+              {"aggregate": "mean", "field": "Employment_Rate", "type": "quantitative", "title": "Avg Employment Rate", "format": ".1f"}
+            ]
+          }
+        },
+        {
+          "title": "Distribution of Employment Rates",
+          "width": 400,
+          "height": 300,
+          "mark": "bar",
+          "transform": [
+            {"filter": {"param": "brush", "empty": true}},
+            {"filter": {"param": "education_brush", "empty": true}}
+          ],
+          "encoding": {
+            "x": {
+              "bin": {"maxbins": 20},
+              "field": "Employment_Rate",
+              "type": "quantitative",
+              "title": "Employment Rate (%)"
+            },
+            "y": {
+              "aggregate": "count",
+              "type": "quantitative",
+              "title": "Number of Records"
+            },
+            "color": {
+              "field": "Sex",
+              "type": "nominal",
+              "title": "Gender"
+            },
+            "tooltip": [
+              {"field": "Employment_Rate", "type": "quantitative", "bin": true, "title": "Employment Rate Range"},
+              {"aggregate": "count", "type": "quantitative", "title": "Count"}
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "view": {"stroke": null},
+    "axis": {"grid": false}
+  }
+}

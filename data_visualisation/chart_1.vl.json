@@ -1,35 +1,32 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "data": {
-        "url": "https://raw.githubusercontent.com/Justetete/COMP40610_Information_Visualisation_Assignment/refs/heads/main/data_cleaning/combined_clean_data.csv",
+        "url": "https://raw.githubusercontent.com/Justetete/COMP40610_Information_Visualisation_Assignment/main/data_cleaning/combined_clean_data_v1.csv",
         "format": {"type": "csv"}
     },
     "transform": [
         {"filter": "datum.Year == 2024"},
-        {"filter": {"field": "Statistic Label", "equal": "Employment Rate"}}
+        {"filter": "datum.Employment_Rate != null"},
+        {"filter": "datum.NUTS 2 Region == Ireland"},
+        {"filter": "datum.Education Attainment Level == Level of education - not stated"}
     ],
-    "repeat": {"column": ["Age Group", "Education Attainment Level", "NUTS 2 Region"]},
-    "spec":{
-        "mark": "bar",
-        "encoding": {
-            "x": {
-                "field":{"repeat": "column"},
-                "type": "nominal"
-            },
-            "y": {
-                "field": "VALUE",
-                "type": "quantitative",
-                "title": "Percentage (%)"
-            },
-            "xOffset": {
-                "field": "Statistic Label"
-            },
-            "color": {
-                "field": "Statistic Label",
-                "type": "nominal",
-                "title": "Metric"
-            }
+    "mark": "bar",
+    "encoding": {
+        "x": {
+            "field": "Age Group",
+            "type": "nominal"
+        },
+        "y": {
+            "field": "Employment_Rate",
+            "type": "quantitative",
+            "title": "Employment Rate (%)",
+            "scale": {"domain": [0, 100]},
+            "aggregate":"median"
+        },
+        "color": {
+            "field": "Sex",
+            "type": "nominal",
+            "title": "Gender"
         }
     }
-
 }
