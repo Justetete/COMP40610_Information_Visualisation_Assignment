@@ -1,0 +1,37 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+        "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSIhjhEct4hAD63LRDJIjrg3f1-5zRDrVimxjF-4v0EIEvoJ-ztE3sCp-xXVN1rUtqFfFFKxSjwgWVv/pub?gid=1442474291&single=true&output=csv",
+        "format": {"type": "csv"}
+    },
+    "transform": [
+        {
+            "lookup": "Quarter",
+            "from": {
+                "data": {"url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSIhjhEct4hAD63LRDJIjrg3f1-5zRDrVimxjF-4v0EIEvoJ-ztE3sCp-xXVN1rUtqFfFFKxSjwgWVv/pub?gid=1254145210&single=true&output=csv"},
+                "key": "Quarter",
+                "fields": ["Annual unemployment rate"]
+            }
+        },
+        {"filter": "datum['Education Attainment Level'] == 'Levels of Education (Levels  0-8)'"},
+        {"filter": "datum['Age Group'] == 'All ages'"},
+        {"filter": "datum['Sex'] != 'Both sexes'"}
+    ],
+    "width": 600,
+    "height": 400,
+    "title": "Employment and Unemployment Rate between 2019Q1 to 2025Q2",
+    "mark": "line",
+    "encoding": {
+        "x": {
+            "field": "Quarter",
+            "type": "ordinal",
+            "title": "Quarter"
+        },
+        "y": {
+            "field": "Employment rate",
+            "type": "quantitative",
+            "title": "Rate (%)",
+            "scale": {"domain": [0, 100]}
+        }
+    }
+}
