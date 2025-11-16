@@ -1,0 +1,41 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+        "url": "https://raw.githubusercontent.com/Justetete/COMP40610_Information_Visualisation_Assignment/main/data_cleaning/quarterly_employment_unemployment_rate.csv",
+        "format": {"type": "csv"}
+    },
+    "transform": [
+        {"filter": "datum['Education Attainment Level'] == 'Levels of Education (Levels  0-8)'"},
+        {"filter": "datum['Sex'] == 'Both sexes'"},
+        {"filter": "datum['Age Group'] != 'All ages'"},
+        {"filter": "datum['Age Group'] != '25 - 54 years'"},
+        {"filter": "datum['Age Group'] != '55 - 74 years'"},
+        {"filter": "datum['Age Group'] != '15 - 24 years'"}
+    ],
+    "width": 1000,
+    "height": 1000,
+    "title": "Employment rate grouped by different age",
+    "mark": "line",
+    "encoding": {
+        "x": {
+            "field": "Quarter",
+            "type": "ordinal",
+            "title": "Quarter"
+        },
+        "y": {
+            "field": "Employment_Rate",
+            "type": "quantitative",
+            "title": "Rate (%)",
+            "scale": {"domain": [30, 100]}
+        },
+        "color": {
+            "field": "Age Group",
+            "type": "nominal",
+            "legend": {
+                "orient": "top-left"},
+            "scale": {
+                "scheme": "category10"
+            }
+        }
+    }
+}
