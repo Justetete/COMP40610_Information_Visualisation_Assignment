@@ -1,0 +1,38 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+        "url": "https://raw.githubusercontent.com/Justetete/COMP40610_Information_Visualisation_Assignment/refs/heads/main/raw_datasets/ALF01_Annual%20Employment%20Rate.csv",
+        "format": {"type": "csv"}
+    },
+    "transform": [
+        {"filter": "datum['Education Attainment Level'] == 'Levels of Education (Levels  0-8)'"},
+        {"filter": "datum['NUTS 2 Region'] == 'Ireland'"},
+        {"filter": "datum['Year'] == '2024'"},
+        {"filter": "datum['Age Group'] != 'All ages'"}
+    ],
+    "width": 600,
+    "height": 400,
+    "title": "Percentage of part-time in different age group grouped by gender in 2024 ",
+    "mark": "bar",
+    "encoding": {
+        "y": {
+            "field": "Age Group",
+            "type": "nominal",
+            "title": "Age Group"
+        },
+        "x": {
+            "field": "VALUE",
+            "type": "quantitative",
+            "title": "Employment rate(%)",
+            "scale": {"domain": [0, 100]}
+        },
+        "yOffset": {
+            "field": "Sex"
+        },
+        "color": {
+            "field": "Sex",
+            "type": "nominal",
+            "legend": {"orient": "top-right"}
+        }
+    }
+}
