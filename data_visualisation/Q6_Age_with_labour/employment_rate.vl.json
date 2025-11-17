@@ -1,11 +1,10 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "data": {
-        "url": "https://raw.githubusercontent.com/Justetete/COMP40610_Information_Visualisation_Assignment/refs/heads/main/raw_datasets/ALF01_Annual%20Employment%20Rate.csv",
+        "url": "https://raw.githubusercontent.com/Justetete/COMP40610_Information_Visualisation_Assignment/refs/heads/main/data_cleaning/annual_employment_rate_cleaned.csv",
         "format": {"type": "csv"}
     },
     "transform": [
-        {"filter": "datum['Education Attainment Level'] == 'Levels of Education (Levels  0-8)'"},
         {"filter": "datum['NUTS 2 Region'] == 'Ireland'"},
         {"filter": "datum['Year'] == '2024'"},
         {"filter": "datum['Age Group'] != 'All ages'"}
@@ -21,9 +20,9 @@
             "title": "Age Group"
         },
         "x": {
-            "field": "VALUE",
+            "field": "employment_rate",
             "type": "quantitative",
-            "title": "Employment rate(%)",
+            "title": "Employment rate (%)",
             "scale": {"domain": [0, 100]}
         },
         "yOffset": {
