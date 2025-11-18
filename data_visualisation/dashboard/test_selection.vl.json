@@ -1,0 +1,33 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Test to debug region selection",
+  "data": {
+    "url": "https://raw.githubusercontent.com/Justetete/COMP40610_Information_Visualisation_Assignment/refs/heads/main/data_cleaning/annual_employment_rate_cleaned.csv"
+  },
+  "transform": [
+    {"filter": "datum.Year == 2024"},
+    {"filter": "datum['Age Group'] == 'All ages'"},
+    {"filter": "datum['Sex'] == 'Both sexes'"},
+    {
+      "calculate": "length(data('region_select_store')) > 0 ? data('region_select_store')[0].region : 'No selection'",
+      "as": "selected_region_debug"
+    }
+  ],
+  "params": [
+    {
+      "name": "region_select",
+      "value": [{"region": "Southern"}]
+    }
+  ],
+  "mark": "bar",
+  "encoding": {
+    "x": {"field": "NUTS 2 Region", "type": "nominal"},
+    "y": {"field": "employment_rate", "type": "quantitative"},
+    "color": {"field": "selected_region_debug", "type": "nominal"},
+    "tooltip": [
+      {"field": "NUTS 2 Region"},
+      {"field": "employment_rate"},
+      {"field": "selected_region_debug", "title": "Selected Region"}
+    ]
+  }
+}
