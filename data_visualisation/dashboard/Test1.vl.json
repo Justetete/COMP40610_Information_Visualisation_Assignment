@@ -36,6 +36,9 @@
                 },
                 {
                 "filter": "datum['Age Group'] != 'All ages'"
+                },
+                {
+                "filter": "datum['Sex'] != 'Both sexes'"
                 }
             ],
             "mark": "bar",
@@ -141,7 +144,8 @@
             "format": {"type": "csv"}
         },
         "transform": [
-            {"filter": "datum['Age Group'] == 'All ages'"}
+            {"filter": "datum['Age Group'] == 'All ages'"},
+            {"filter": "datum['Sex'] != 'Both sexes'"}
         ],
         "title": "Employment and Unemployment Rate between 2019Q1 to 2025Q2",
         "mark": "line",
@@ -161,7 +165,7 @@
                 "field": "Sex",
                 "type": "nominal",
                 "title": "Gender",
-                "legend": {"orient": "top-right"}
+                "legend": {"orient": "bottom-right"}
             }
         }
     }
