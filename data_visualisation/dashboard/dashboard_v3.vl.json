@@ -10,9 +10,10 @@
       "name": "year_select",
       "value": 2024,
       "bind": {
-        "input": "select",
-        "options": [2019, 2020, 2021, 2022, 2023, 2024],
-        "labels": ["2019", "2020", "2021", "2022", "2023", "2024"],
+        "input": "range",
+        "max": 2024,
+        "min": 2019,
+        "step": 1,
         "name": "Select Year: "
       }
     }
@@ -171,24 +172,45 @@
                 "type": "identity",
                 "reflectY": true
             },
+            "params": [
+                {
+                    "name": "region_select",
+                    "select": {
+                        "type": "point",
+                        "fields": ["region"]
+                    }
+                }
+            ],
             "mark": {
                 "type": "geoshape",
                 "stroke": "white",
-                "strokeWidth": 2
+                "strokeWidth": 2,
+                "cursor": "pointer"
             },
             "encoding": {
                 "color": {
-                "field": "employment_rate",
-                "type": "quantitative",
-                "scale": {
-                    "domain": [70, 85]
+                    "condition": {
+                        "param": "region_select",
+                        "field": "employment_rate",
+                        "type": "quantitative",
+                        "scale": {
+                            "domain": [70, 85]
+                        },
+                        "legend": {
+                            "title": "Employment Rate (%)",
+                            "orient": "right",
+                            "format": ".1f",
+                            "direction": "vertical"
+                        }
+                    },
+                    "value": "lightgray"
                 },
-                "legend": {
-                    "title": "Employment Rate (%)",
-                    "orient": "right",
-                    "format": ".1f",
-                    "direction": "vertical"
-                }
+                "opacity": {
+                    "condition": {
+                        "param": "region_select",
+                        "value": 1
+                    },
+                    "value": 0.3
                 },
                 "tooltip": [
                 {"field": "region", "type": "nominal", "title": "Region"},
