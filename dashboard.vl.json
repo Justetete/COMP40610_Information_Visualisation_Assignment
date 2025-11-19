@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
-    "text": "Ireland Employment Rate Dashboard",
+    "text": "Ireland Employment Rate Dashboard (2019-2024)",
     "fontSize": 24,
     "anchor": "middle",
     "fontWeight": "bold",
