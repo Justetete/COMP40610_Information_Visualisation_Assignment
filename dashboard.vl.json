@@ -29,7 +29,7 @@
             "width": 280,
             "height": 700,
             "title": {
-              "text": "Employment Rate by Age",
+              "text": "Employment Rate by Age Group",
               "fontSize": 16,
               "fontWeight": "bold"
             },
@@ -77,22 +77,22 @@
                     "mark": "bar",
                     "encoding": {
                         "y": {
-                        "field": "Age Group",
-                        "type": "nominal",
-                        "title": "Age Group",
-                        "sort": null
+                            "field": "Age Group",
+                            "type": "nominal",
+                            "title": "Age Group",
+                            "sort": null
                         },
                         "x": {
-                        "field": "employment_rate",
-                        "type": "quantitative",
-                        "title": "Employment Rate (%)",
-                        "scale": {
-                            "domain": [35, 100],
-                            "clamp": true
-                        }
+                            "field": "employment_rate",
+                            "type": "quantitative",
+                            "title": "Employment Rate (%)",
+                            "scale": {
+                                "domain": [0, 100],
+                                "clamp": true
+                            }
                         },
                         "yOffset": {
-                        "field": "Sex"
+                            "field": "Sex"
                         },
                         "color": {
                             "field": "Sex",
@@ -117,9 +117,9 @@
                             "value": 0.2
                         },
                         "tooltip": [
-                        {"field": "Age Group", "type": "nominal", "title": "Age Group"},
-                        {"field": "employment_rate", "type": "quantitative", "title": "Employment Rate (%)", "format": ".1f"},
-                        {"field": "Year", "type": "quantitative", "title": "Year"}
+                            {"field": "Age Group", "type": "nominal", "title": "Age Group"},
+                            {"field": "employment_rate", "type": "quantitative", "title": "Employment Rate (%)", "format": ".1f"},
+                            {"field": "Year", "type": "quantitative", "title": "Year"}
                         ]
                     }
                 },
@@ -140,7 +140,7 @@
                             "field": "employment_rate",
                             "type": "quantitative",
                             "scale": {
-                                "domain": [35, 100],
+                                "domain": [0, 100],
                                 "clamp": true
                             }
                         },
@@ -302,7 +302,7 @@
                         "field": "employment_rate",
                         "type": "quantitative",
                         "scale": {
-                            "domain": [70, 85]
+                            "domain": [60, 85]
                         },
                         "legend": {
                             "title": "Rate (%)",
@@ -325,7 +325,7 @@
                 "tooltip": [
                 {"field": "region", "type": "nominal", "title": "Region"},
                 {"field": "employment_rate", "type": "quantitative", "title": "Employment Rate (%)", "format": ".1f"},
-                {"field": "year", "type": "quantitative", "title": "Year"}
+                {"field": "Year", "type": "quantitative", "title": "Year"}
                 ]
             }
             }
@@ -343,7 +343,7 @@
             {"filter": "datum['Sex'] != 'Both sexes'"}
         ],
         "title": {
-            "text": "Employment Rate between 2019Q1 to 2025Q4",
+            "text": "Employment Rate between 2019Q1 to 2024Q4",
             "fontSize": 16,
             "fontWeight": "bold",
             "align": "center",
